@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
-// import connect from '@vkontakte/vk-connect';
-import Root from '@vkontakte/vkui/dist/components/Root/Root';
+import React, { useState, useEffect } from 'react';
+import connect from '@vkontakte/vk-connect';
+// import Root from '@vkontakte/vkui/dist/components/Root/Root';
+import Epic from '@vkontakte/vkui/dist/components/Epic/Epic';
+import Tabbar from '@vkontakte/vkui/dist/components/Tabbar/Tabbar';
+import TabbarItem from '@vkontakte/vkui/dist/components/TabbarItem/TabbarItem';
 // import View from '@vkontakte/vkui/dist/components/View/View';
 // import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Home from './views/Home/Home';
+import Icon28Newsfeed from '@vkontakte/icons/dist/28/newsfeed';
+import Icon28Messages from '@vkontakte/icons/dist/28/messages';
 
 const App = () => {
+	const [activeStory, setActiveStory] = useState('events');
 	const [activeView] = useState('home');
 	const [activePanel, setActivePanel] = useState('example');
-	// const [fetchedUser, setUser] = useState(null);
+	const [fetchedUser, setUser] = useState(null);
 	// const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
 
-	/*useEffect(() => {
+	useEffect(() => {
 		connect.subscribe(({ detail: { type, data }}) => {
 			if (type === 'VKWebAppUpdateConfig') {
 				const schemeAttribute = document.createAttribute('scheme');
@@ -24,10 +30,9 @@ const App = () => {
 		async function fetchData() {
 			const user = await connect.sendPromise('VKWebAppGetUserInfo');
 			setUser(user);
-			setPopout(null);
 		}
 		fetchData();
-	}, []); */
+	}, []);
 
 	/*<View activePanel={activePanel} popout={popout}>*/
 	/*	<Home id='home' fetchedUser={fetchedUser} go={go} />*/
@@ -38,10 +43,34 @@ const App = () => {
 		setActivePanel(e.currentTarget.dataset.to);
 	};
 
+	const storyGo = e => {
+		setActiveStory(e.currentTarget.dataset.story);
+	};
+
 	return (
-		<Root activeView={activeView}>
-			<Home id={'home'} activePanel={activePanel} go={go}/>
-		</Root>
+		<Epic activeStory={activeStory} tabbar={
+			<Tabbar>
+				<TabbarItem
+					data-story={"events"}
+					onClick={storyGo}
+					text={"События"}
+					selected={activeStory === 'events'}
+				>
+					<Icon28Newsfeed />
+				</TabbarItem>
+				<TabbarItem
+					data-story={"im"}
+					onClick={storyGo}
+					text={"Диалоги"}
+					selected={activeStory === 'im'}
+				>
+					<Icon28Messages />
+				</TabbarItem>
+			</Tabbar>
+		}
+		>
+			<Home id={'events'} activePanel={activePanel} fetchedUser={fetchedUser} go={go}/>
+		</Epic>
 	);
 }
 

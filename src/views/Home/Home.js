@@ -13,15 +13,23 @@ import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 
 import { platform, IOS } from '@vkontakte/vkui';
+import Avatar from "@vkontakte/vkui/dist/components/Avatar/Avatar";
 const osName = platform();
 
-const Home = ({activePanel, go}) => (
+const Home = ({activePanel, go, fetchedUser}) => (
     <View activePanel={activePanel}>
         <Panel id={'example'}>
-            <PanelHeader>Example</PanelHeader>
-            <Group title="Simple Group">
+            <PanelHeader>События</PanelHeader>
+            <Group title="Новости">
+                {fetchedUser &&
+                <Cell
+                    before={fetchedUser.photo_200 ? <Avatar src={fetchedUser.photo_200}/> : null}
+                    description={fetchedUser.city && fetchedUser.city.title ? fetchedUser.city.title : ''}
+                >
+                    {`${fetchedUser.first_name} ${fetchedUser.last_name}`}
+                </Cell>}
                 <Cell>
-                    <Button size={'xl'} onClick={go} data-to={'persik'}>Go Next Page</Button>
+                    <Button size={'xl'} onClick={go} data-to={'persik'}>Персик, кыс-кыс.</Button>
                 </Cell>
             </Group>
         </Panel>
