@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/superapp/static/js/main.fd266b43.chunk.js",
-    "main.js.map": "/superapp/static/js/main.fd266b43.chunk.js.map",
+    "main.js": "/superapp/static/js/main.0a2fa958.chunk.js",
+    "main.js.map": "/superapp/static/js/main.0a2fa958.chunk.js.map",
     "runtime-main.js": "/superapp/static/js/runtime-main.6c458d14.js",
     "runtime-main.js.map": "/superapp/static/js/runtime-main.6c458d14.js.map",
     "static/css/2.4e89ce74.chunk.css": "/superapp/static/css/2.4e89ce74.chunk.css",
-    "static/js/2.769f6aab.chunk.js": "/superapp/static/js/2.769f6aab.chunk.js",
-    "static/js/2.769f6aab.chunk.js.map": "/superapp/static/js/2.769f6aab.chunk.js.map",
+    "static/js/2.89a2d669.chunk.js": "/superapp/static/js/2.89a2d669.chunk.js",
+    "static/js/2.89a2d669.chunk.js.map": "/superapp/static/js/2.89a2d669.chunk.js.map",
     "index.html": "/superapp/index.html",
-    "precache-manifest.c0ea73b5a12ff92b8d305f716cd0b331.js": "/superapp/precache-manifest.c0ea73b5a12ff92b8d305f716cd0b331.js",
+    "precache-manifest.79276eb867359a87b99164441bb02689.js": "/superapp/precache-manifest.79276eb867359a87b99164441bb02689.js",
     "service-worker.js": "/superapp/service-worker.js",
     "static/css/2.4e89ce74.chunk.css.map": "/superapp/static/css/2.4e89ce74.chunk.css.map"
   }
