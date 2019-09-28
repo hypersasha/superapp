@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import connect from '@vkontakte/vk-connect';
-// import Root from '@vkontakte/vkui/dist/components/Root/Root';
 import Epic from '@vkontakte/vkui/dist/components/Epic/Epic';
 import Tabbar from '@vkontakte/vkui/dist/components/Tabbar/Tabbar';
 import TabbarItem from '@vkontakte/vkui/dist/components/TabbarItem/TabbarItem';
+
 // import View from '@vkontakte/vkui/dist/components/View/View';
 // import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
+
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Home from './views/Home/Home';
+import EventsFeed from "./views/EventsFeed/EventsFeed";
+
 import Icon28Newsfeed from '@vkontakte/icons/dist/28/newsfeed';
 import Icon28Messages from '@vkontakte/icons/dist/28/messages';
 
 const App = () => {
 	const [activeStory, setActiveStory] = useState('events');
+	const [isEpicVisible, setIsEpicVisible] = useState(true);
+	const [onlyUserEvent, setOnlyUserEvent] = useState(false);
+
 	const [activeView] = useState('home');
 	const [activePanel, setActivePanel] = useState('example');
 	const [fetchedUser, setUser] = useState(null);
@@ -47,8 +53,21 @@ const App = () => {
 		setActiveStory(e.currentTarget.dataset.story);
 	};
 
+	const OnCreateBegins = () => {
+		setIsEpicVisible(false);
+	};
+
+	const OnCreateEnds = () => {
+		setIsEpicVisible(true);
+	};
+
+	function OnFilterChange(onlyUser) {
+		setOnlyUserEvent(onlyUser);
+	}
+
 	return (
 		<Epic activeStory={activeStory} tabbar={
+			isEpicVisible ?
 			<Tabbar>
 				<TabbarItem
 					data-story={"events"}
@@ -61,15 +80,21 @@ const App = () => {
 				<TabbarItem
 					data-story={"im"}
 					onClick={storyGo}
-					text={"Диалоги"}
-					selected={activeStory === 'im'}
+					text={"Награды"}
+					selected={activeStory === 'gifts'}
 				>
 					<Icon28Messages />
 				</TabbarItem>
-			</Tabbar>
+			</Tabbar> : ''
 		}
 		>
-			<Home id={'events'} activePanel={activePanel} fetchedUser={fetchedUser} go={go}/>
+			<EventsFeed id={'events'}
+						fetchedUser={fetchedUser}
+						OnChangeFilters={OnFilterChange}
+						onlyUserEvents={onlyUserEvent}
+						OnCreateBegins={OnCreateBegins}
+						OnCreateEnds={OnCreateEnds} />
+			{/*<Home id={'events'} activePanel={activePanel} fetchedUser={fetchedUser} go={go}/>*/}
 		</Epic>
 	);
 }
